@@ -1,9 +1,9 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
 import { generateText, ollama, OllamaApiConfiguration } from "modelfusion";
-import {} from "./ressources"
+import { } from "./ressources"
 import QueryString from 'qs';
-import  bodyParser  from 'body-parser';
+import bodyParser from 'body-parser';
 const api = new OllamaApiConfiguration({});
 const app = express();
 const port = process.env.PORT || 3000;
@@ -21,7 +21,7 @@ const port = process.env.PORT || 3000;
 // });
 // console.log(text);
 
-function createText(promptText:string,temperatureChoice: number,maxGenerationTokensChoice: number):Promise<string> {
+function createText(promptText: string, temperatureChoice: number, maxGenerationTokensChoice: number): Promise<string> {
   if (temperatureChoice === undefined) {
     temperatureChoice = 0.7;
     console.log("temperature isn't defined, using default value");
@@ -46,16 +46,16 @@ function createText(promptText:string,temperatureChoice: number,maxGenerationTok
   });
   return text;
 }
-function add(a:number,b:number):number {
+function add(a: number, b: number): number {
   return a + b
 }
-function sub(a:number,b:number):number {
+function sub(a: number, b: number): number {
   return a - b
 }
-function mul(a:number,b:number):number {
+function mul(a: number, b: number): number {
   return a * b
 }
-function divi(a:number,b:number):number {
+function divi(a: number, b: number): number {
   return a / b
 }
 
@@ -105,13 +105,13 @@ app.get('/add', (req: Request, res: Response) => {
   };
   res.send(`The sum of ${a} and ${b} is ${add(a, b)}`).json(result);
 });
-  //to use it : 
-  //http://localhost:3000/add?a=5&b=7
+//to use it : 
+//http://localhost:3000/add?a=5&b=7
 
 
 app.post('/addPost', (req: Request, res: Response) => {
   console.log("addPost", req.body)
-  const {a, b} = req.body;
+  const { a, b } = req.body;
   if (typeof a !== 'number' || typeof b !== 'number') {
     res.status(400).send('Please provide a valid number');
   }
@@ -130,19 +130,19 @@ app.post('/addPost', (req: Request, res: Response) => {
 // }
 
 app.get('/generate', async (req: Request, res: Response) => {
-  const prompt:string = req.query.prompt as string;
+  const prompt: string = req.query.prompt as string;
   if (typeof prompt !== 'string') {
     res.status(400).send('Please provide a valid prompt');
   }
-  const temperatureChoice:number = Number(req.query.temperature);
+  const temperatureChoice: number = Number(req.query.temperature);
   if (typeof temperatureChoice !== 'number') {
     res.status(400).send('Please provide a valid temperature');
   }
-  const maxGenerationTokensChoice:number = Number(req.query.maxGenerationTokens);
+  const maxGenerationTokensChoice: number = Number(req.query.maxGenerationTokens);
   if (typeof maxGenerationTokensChoice !== 'number') {
     res.status(400).send('Please provide a valid maxGenerationTokens');
   }
-  const text = await createText(prompt,temperatureChoice,maxGenerationTokensChoice);
+  const text = await createText(prompt, temperatureChoice, maxGenerationTokensChoice);
   console.log(text);
   res.send(text);
 });
@@ -160,7 +160,7 @@ app.post('/generatePost', async (req: Request, res: Response) => {
   }
   console.log("generate", prompt, temperatureChoice, maxGenerationTokensChoice);
 
-  const text:string = await createText(prompt,temperatureChoice,maxGenerationTokensChoice);
+  const text: string = await createText(prompt, temperatureChoice, maxGenerationTokensChoice);
   console.log(text);
   const result = {
     result: text
