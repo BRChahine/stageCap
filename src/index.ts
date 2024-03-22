@@ -73,7 +73,7 @@ app.get('/divi', (req: Request, res: Response) => {
   const result = {
     result: divi(a, b)
   };
-  res.send(`The div of ${a} and ${b} is ${divi(a, b)}`).json(result);
+  res.status(200).json(result);
 });
 //http://localhost:3000/divi?a=8&b=7
 
@@ -83,7 +83,7 @@ app.get('/sub', (req: Request, res: Response) => {
   const result = {
     result: sub(a, b)
   };
-  res.send(`The dif of ${a} and ${b} is ${sub(a, b)}`).json(result);
+  res.status(200).json(result);
 });
 //http://localhost:3000/sub?a=8&b=7
 
@@ -93,7 +93,7 @@ app.get('/mul', (req: Request, res: Response) => {
   const result = {
     result: mul(a, b)
   };
-  res.send(`The mul of ${a} and ${b} is ${mul(a, b)}`).json(result);
+  res.status(200).json(result);
 });
 //http://localhost:3000/mul?a=5&b=7
 
@@ -103,7 +103,7 @@ app.get('/add', (req: Request, res: Response) => {
   const result = {
     result: add(a, b)
   };
-  res.send(`The sum of ${a} and ${b} is ${add(a, b)}`).json(result);
+  res.status(200).json(result);
 });
 //to use it : 
 //http://localhost:3000/add?a=5&b=7
